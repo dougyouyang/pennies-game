@@ -1,0 +1,76 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+    int x[n];
+    int counter = 0;
+    int counterb = 0;
+    int turn = 2;
+    int m;
+    int player[2];
+    player[0] = 0;
+    player[1] = 0;
+
+    do
+    {
+        cin >> x[counter];
+        counter++;
+    }
+    while (counter < n);
+
+
+    do
+    {
+        turn = 3-turn;
+        counter = counterb;
+        do
+        {
+            cout << x[counter] << " ";
+            counter++;
+        }
+        while (counter < n);
+        cout << endl;
+
+        cout << "player " << turn << "'s turn, enter 0(left) or 1(right)" << endl;
+        cin >> m;
+
+        if (m != 0 && m != 1){
+            do
+            {
+                cout << "please try again!" << endl;
+                cin >> m;
+            }
+            while (m != 0 && m != 1);
+        }
+
+
+        if (m == 0){
+            player[turn-1] += x[counterb];
+            counterb++;
+        }
+        else {
+            player[turn-1] += x[n-1];
+            n--;
+        }
+
+        cout << "player " << turn << "'s score is " << player [turn-1] << endl;
+        cout << "player " << 3-turn << "'s score is " << player [3-turn-1] << endl;
+    }
+    while (counterb != n);
+
+    if (player[0] > player[1]){
+        cout << "player 1 wins" << endl;
+    }
+    else if (player[1] > player[0]){
+        cout << "player 2 wins" << endl;
+    }
+    else {
+        cout << "it's a tie" << endl;
+    }
+
+    return 0;
+}
