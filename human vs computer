@@ -1,0 +1,205 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+    srand(time(NULL));
+    int n;
+    n = (rand()%20+1);
+    int x[n];
+    int w;
+    int counter = 0;
+    int counterb = 0;
+    int cscore = 0, hscore = 0;
+    int m;
+
+    //make sure n is an even number
+    if (n%2 == 1){
+        n++;
+    }
+
+    //random pick the numbers
+    do
+    {
+        x[counter] = rand()%50+1;
+        cout << x[counter] << " ";
+        counter++;
+    }
+    while (counter < n);
+    cout << endl;
+    counter = 0;
+
+
+    //who want to be first
+    cout << "do you want to be the first player? enter 1(yes) or 0(no)" << endl;
+    cin >> w;
+    if (w != 0 && w != 1){
+        do
+        {
+            cout << "please try again!" << endl;
+            cin >> w;
+        }
+        while (w != 0 && w != 1);
+    }
+
+
+    //if computer first
+    if (w == 0){
+        do
+        {
+            //show the numbers
+            counter = counterb;
+            do
+            {
+                cout << x[counterb] << " ";
+                counterb++;
+            }
+            while (counterb < n);
+            cout << endl;
+            counterb = counter;
+
+            // computer's turn
+            if (x[counterb] > x[n-1]){
+                cout << "left" << endl;
+                cscore += x[counterb];
+                counterb++;
+            }
+            else {
+                cout << "right" << endl;
+                cscore += x[n-1];
+                n--;
+             }
+            cout << "computer's score is " << cscore << endl;
+            cout << "your score is " << hscore << endl;
+
+            //see if there is no number left
+            if (n <= counterb){
+                break;
+            }
+
+
+            //show the numbers
+            counter = counterb;
+            do
+            {
+                cout << x[counterb] << " ";
+                counterb++;
+            }
+            while (counterb < n);
+            cout << endl;
+            counterb = counter;
+
+            //player's turn
+            cout << "player's turn, enter 0(left) or 1(right)" << endl;
+            cin >> m;
+            if (m != 0 && m != 1){
+            do
+            {
+                cout << "please try again!" << endl;
+                cin >> m;
+            }
+            while (m != 0 && m != 1);
+            }
+
+            if (m == 0){
+                hscore += x[counterb];
+                counterb++;
+            }
+            else {
+                hscore += x[n-1];
+                n--;
+            }
+            cout << "computer's score is " << cscore << endl;
+            cout << "your score is " << hscore << endl;
+        }
+        while (n > counterb);
+    }
+
+    //if player first
+    else {
+        do
+        {
+            //show the numbers
+            counter = counterb;
+            do
+            {
+                cout << x[counterb] << " ";
+                counterb++;
+            }
+            while (counterb < n);
+            cout << endl;
+            counterb = counter;
+
+            //player's turn
+            cout << "player's turn, enter 0(left) or 1(right)" << endl;
+            cin >> m;
+            if (m != 0 && m != 1){
+            do
+            {
+                cout << "please try again!" << endl;
+                cin >> m;
+            }
+            while (m != 0 && m != 1);
+            }
+
+            if (m == 0){
+                hscore += x[counterb];
+                counterb++;
+            }
+            else {
+                hscore += x[n-1];
+                n--;
+            }
+            cout << "computer's score is " << cscore << endl;
+            cout << "your score is " << hscore << endl;
+
+            //see if there is no number left
+            if (n <= counterb){
+                break;
+            }
+
+
+            //show the numbers
+            counter = counterb;
+            do
+            {
+                cout << x[counterb] << " ";
+                counterb++;
+            }
+            while (counterb < n);
+            cout << endl;
+            counterb = counter;
+
+            // computer's turn
+            if (x[counterb] > x[n-1]){
+                cout << "left" << endl;
+                cscore += x[counterb];
+                counterb++;
+            }
+            else {
+                cout << "right" << endl;
+                cscore += x[n-1];
+                n--;
+            }
+            cout << "computer's score is " << cscore << endl;
+            cout << "your score is " << hscore << endl;
+        }
+        while (n > counterb);
+    }
+
+    //check who wins
+    if (cscore > hscore){
+        cout << "computer wins" << endl;
+    }
+    else if (hscore > cscore){
+        cout << "player wins" << endl;
+    }
+    else {
+        cout << "it's a tie" << endl;
+    }
+
+    return 0;
+}
